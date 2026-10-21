@@ -1,0 +1,4 @@
+data/
+results/windows.csv
+__pycache__/
+*.pyc
