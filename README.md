@@ -1,5 +1,7 @@
 # Leakage-Aware Fault Detection on GPVS-Faults
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23537370.svg)](https://doi.org/10.5281/zenodo.23537370)
+
 Published work on the GPVS-Faults dataset (a grid-connected PV inverter recorded under seven fault types) often reports near-perfect fault classification. This repo checks whether those scores come from the faults or from something easier. In short, the random-split protocol mostly teaches a model to recognize which recording a window came from. When the model has to work on a different operating mode, macro-F1 falls to between 0.15 and 0.52.
 
 ## Data
@@ -38,3 +40,6 @@ python code/05_figures.py && python code/06_tables.py && python code/07_sensitiv
 - Public data only. No employer data, equipment or procedures were used.
 
 Author: Khandoker Samiul Hoque (ORCID [0009-0008-0756-2395](https://orcid.org/0009-0008-0756-2395)). Code license: MIT. Manuscript in preparation.
+
+## Archived release
+Version 1.0.0 is archived on Zenodo: [doi:10.5281/zenodo.23537371](https://doi.org/10.5281/zenodo.23537371). To cite the latest version instead, use [doi:10.5281/zenodo.23537370](https://doi.org/10.5281/zenodo.23537370).
