@@ -27,6 +27,7 @@ w0 = pd.read_csv(RES / "windows.csv")
 on = pd.read_csv(RES / "onsets.csv").set_index("file")
 META = ["file", "fault", "mode", "win", "t_center"]
 RAW = [c for c in w0.columns if c not in META]
+SIX = [0, 1, 2, 5, 6, 7]   # classes with windows in both modes at the 0.5 s guard band; F3 has none in MPPT
 
 
 def run(shift=0.0, guard=0.5, base_t=3.0):
@@ -48,7 +49,8 @@ def run(shift=0.0, guard=0.5, base_t=3.0):
                                                       random_state=0))]:
             p = m.fit(X[tr], y[tr]).predict(X[te])
             out.append({"direction": f"{tr_m}->{te_m}", "model": name,
-                        "macro_f1": f1_score(y[te], p, average="macro")})
+                        "macro_f1": f1_score(y[te], p, average="macro"),
+                        "macro_f1_six": f1_score(y[te], p, labels=SIX, average="macro", zero_division=0)})
     return out
 
 
@@ -61,4 +63,6 @@ for b in [2.0, 3.0, 4.0]:
     rows += [{"factor": "baseline_s", "value": b, **r} for r in run(base_t=b)]
 df = pd.DataFrame(rows)
 df.to_csv(RES / "sensitivity.csv", index=False)
-print(df.pivot_table(index=["factor", "value"], columns=["model", "direction"], values="macro_f1").round(3).to_string())
+for score in ["macro_f1", "macro_f1_six"]:
+    print(score)
+    print(df.pivot_table(index=["factor", "value"], columns=["model", "direction"], values=score).round(3).to_string())

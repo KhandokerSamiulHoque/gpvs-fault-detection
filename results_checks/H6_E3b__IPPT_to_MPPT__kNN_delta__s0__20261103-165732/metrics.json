@@ -1,0 +1,22 @@
+{
+  "run_id": "H6_E3b__IPPT_to_MPPT__kNN_delta__s0__20261103-165732",
+  "exp": "H6_E3b",
+  "method": "kNN_delta",
+  "dataset": "IPPT_to_MPPT",
+  "seed": 0,
+  "fold": null,
+  "config": {
+    "model": "kNN",
+    "features": "delta"
+  },
+  "metrics": {
+    "macro_f1": 0.5107857814349032,
+    "macro_f1_six": 0.5107857814349032,
+    "n_test": 3274.0
+  },
+  "git_commit": "unavailable",
+  "git_dirty": false,
+  "data_sha256": {},
+  "wall_clock_s": 0.921,
+  "status": "ok"
+}

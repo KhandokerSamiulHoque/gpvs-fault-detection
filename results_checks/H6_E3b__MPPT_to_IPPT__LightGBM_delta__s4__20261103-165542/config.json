@@ -1,0 +1,4 @@
+{
+  "model": "LightGBM",
+  "features": "delta"
+}

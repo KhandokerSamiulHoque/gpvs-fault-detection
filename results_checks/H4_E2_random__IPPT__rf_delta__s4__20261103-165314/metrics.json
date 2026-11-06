@@ -1,0 +1,21 @@
+{
+  "run_id": "H4_E2_random__IPPT__rf_delta__s4__20261103-165314",
+  "exp": "H4_E2_random",
+  "method": "rf_delta",
+  "dataset": "IPPT",
+  "seed": 4,
+  "fold": null,
+  "config": {
+    "model": "RandomForestClassifier"
+  },
+  "metrics": {
+    "macro_f1": 0.9607512762151661,
+    "n_test": 668.0,
+    "n_classes": 7.0
+  },
+  "git_commit": "unavailable",
+  "git_dirty": false,
+  "data_sha256": {},
+  "wall_clock_s": 2.329,
+  "status": "ok"
+}

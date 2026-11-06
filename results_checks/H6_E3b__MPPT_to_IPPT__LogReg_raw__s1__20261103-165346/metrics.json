@@ -1,0 +1,22 @@
+{
+  "run_id": "H6_E3b__MPPT_to_IPPT__LogReg_raw__s1__20261103-165346",
+  "exp": "H6_E3b",
+  "method": "LogReg_raw",
+  "dataset": "MPPT_to_IPPT",
+  "seed": 1,
+  "fold": null,
+  "config": {
+    "model": "LogReg",
+    "features": "raw"
+  },
+  "metrics": {
+    "macro_f1": 0.14941167028046062,
+    "macro_f1_six": 0.17431361532720405,
+    "n_test": 3389.0
+  },
+  "git_commit": "unavailable",
+  "git_dirty": false,
+  "data_sha256": {},
+  "wall_clock_s": 1.509,
+  "status": "ok"
+}

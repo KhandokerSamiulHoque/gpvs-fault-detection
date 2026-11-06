@@ -95,42 +95,98 @@ generated: {by: process:code/06_tables.py}
 | IPPT->MPPT | delta      | kNN      |      0.511 |      0.416 |      0.609 |     0.499 |       0.914 |       0.276 |       0.725 |           0 |       0.92  |       0.157 |       0     |
 
 
-## Table: detection
+## Table: detection (held-out threshold, 12_detection_heldout.py)
 
-| detector   | file   |   fault |   onset_t |   detected |   delay_s |   false_alarm_rate_pre |   post_alarm_fraction |
-|:-----------|:-------|--------:|----------:|-----------:|----------:|-----------------------:|----------------------:|
-| static     | F0M    |       0 |   nan     |        nan |   nan     |                  0.004 |               nan     |
-| static     | F1M    |       1 |     8.469 |          1 |     0.46  |                  0     |                 0.915 |
-| static     | F2M    |       2 |     8.729 |          1 |     0.46  |                  0     |                 0.919 |
-| static     | F3M    |       3 |     6.469 |          0 |   nan     |                  0     |                 0     |
-| static     | F4M    |       4 |     5.81  |          0 |   nan     |                  0     |                 0     |
-| static     | F5M    |       5 |     7.409 |          1 |     0.46  |                  0     |                 0.934 |
-| static     | F6M    |       6 |    11.589 |          0 |   nan     |                  0     |                 0     |
-| static     | F7M    |       7 |    11.169 |          1 |     0.4   |                  0     |                 0.877 |
-| static     | F0L    |       0 |   nan     |        nan |   nan     |                  0.005 |               nan     |
-| static     | F1L    |       1 |     8.669 |          1 |     0.44  |                  0     |                 0.896 |
-| static     | F2L    |       2 |     8.902 |          1 |     0     |                  0.615 |                 1     |
-| static     | F3L    |       3 |     8.929 |          1 |     0.44  |                  0     |                 0.69  |
-| static     | F4L    |       4 |     7.149 |          1 |     5.799 |                  0     |                 0.176 |
-| static     | F5L    |       5 |     7.169 |          1 |     0.46  |                  0     |                 0.936 |
-| static     | F6L    |       6 |    11.209 |          0 |   nan     |                  0     |                 0     |
-| static     | F7L    |       7 |     9.329 |          1 |     0.44  |                  0     |                 0.913 |
-| sliding    | F0M    |       0 |   nan     |        nan |   nan     |                  0.006 |               nan     |
-| sliding    | F1M    |       1 |     8.469 |          1 |     0.1   |                  0.02  |                 0.982 |
-| sliding    | F2M    |       2 |     8.729 |          1 |     0.18  |                  0.033 |                 0.93  |
-| sliding    | F3M    |       3 |     6.469 |          1 |     0.36  |                  0     |                 0.308 |
-| sliding    | F4M    |       4 |     5.81  |          1 |     5.459 |                  0.092 |                 0.002 |
-| sliding    | F5M    |       5 |     7.409 |          1 |     0.08  |                  0     |                 0.989 |
-| sliding    | F6M    |       6 |    11.589 |          1 |     0.18  |                  0     |                 0.617 |
-| sliding    | F7M    |       7 |    11.169 |          1 |     0.18  |                  0.003 |                 0.679 |
-| sliding    | F0L    |       0 |   nan     |        nan |   nan     |                  0     |               nan     |
-| sliding    | F1L    |       1 |     8.669 |          1 |     0.08  |                  0.062 |                 0.873 |
-| sliding    | F2L    |       2 |     8.902 |          1 |     0     |                  1     |                 1     |
-| sliding    | F3L    |       3 |     8.929 |          1 |     0.04  |                  0     |                 0.972 |
-| sliding    | F4L    |       4 |     7.149 |          1 |     0     |                  0.061 |                 0.129 |
-| sliding    | F5L    |       5 |     7.169 |          1 |     0.2   |                  0.038 |                 0.972 |
-| sliding    | F6L    |       6 |    11.209 |          1 |     0.88  |                  0     |                 0.25  |
-| sliding    | F7L    |       7 |     9.329 |          1 |     0.3   |                  0     |                 0.295 |
+| detector   | file   |   fault |   onset_t |   detected |   delay_s |   false_alarm_rate | false_alarm_basis      |   post_alarm_fraction |
+|:-----------|:-------|--------:|----------:|-----------:|----------:|-------------------:|:-----------------------|----------------------:|
+| static     | F0M    |       0 |   nan     |        nan |   nan     |              0.973 | F0 held-out 9 s to end |               nan     |
+| static     | F1M    |       1 |     8.469 |          1 |     0.04  |              0     | pre-onset              |                 0.993 |
+| static     | F2M    |       2 |     8.729 |          1 |     0     |              0     | pre-onset              |                 1     |
+| static     | F3M    |       3 |     6.469 |          0 |   nan     |              0     | pre-onset              |                 0     |
+| static     | F4M    |       4 |     5.81  |          1 |     6.479 |              0     | pre-onset              |                 0.247 |
+| static     | F5M    |       5 |     7.409 |          1 |     0.24  |              0     | pre-onset              |                 0.966 |
+| static     | F6M    |       6 |    11.589 |          1 |     0     |              0.295 | pre-onset              |                 1     |
+| static     | F7M    |       7 |    11.169 |          1 |     0     |              0.311 | pre-onset              |                 1     |
+| static     | F0L    |       0 |   nan     |        nan |   nan     |              0.799 | F0 held-out 9 s to end |               nan     |
+| static     | F1L    |       1 |     8.669 |          1 |     0     |              0     | pre-onset              |                 1     |
+| static     | F2L    |       2 |     8.902 |          1 |     0     |              1     | pre-onset              |                 1     |
+| static     | F3L    |       3 |     8.929 |          1 |     0.08  |              0     | pre-onset              |                 0.944 |
+| static     | F4L    |       4 |     7.149 |          1 |     0     |              0.879 | pre-onset              |                 1     |
+| static     | F5L    |       5 |     7.169 |          1 |     0.44  |              0     | pre-onset              |                 0.938 |
+| static     | F6L    |       6 |    11.209 |          1 |     0     |              0.364 | pre-onset              |                 0.994 |
+| static     | F7L    |       7 |     9.329 |          1 |     0.3   |              0     | pre-onset              |                 0.941 |
+| sliding    | F0M    |       0 |   nan     |        nan |   nan     |              0     | F0 held-out 9 s to end |               nan     |
+| sliding    | F1M    |       1 |     8.469 |          1 |     0.1   |              0.02  | pre-onset              |                 0.982 |
+| sliding    | F2M    |       2 |     8.729 |          1 |     0.18  |              0.033 | pre-onset              |                 0.93  |
+| sliding    | F3M    |       3 |     6.469 |          1 |     0.36  |              0     | pre-onset              |                 0.308 |
+| sliding    | F4M    |       4 |     5.81  |          0 |   nan     |              0.092 | pre-onset              |                 0     |
+| sliding    | F5M    |       5 |     7.409 |          1 |     0.08  |              0     | pre-onset              |                 0.989 |
+| sliding    | F6M    |       6 |    11.589 |          1 |     0.18  |              0     | pre-onset              |                 0.617 |
+| sliding    | F7M    |       7 |    11.169 |          1 |     0.18  |              0     | pre-onset              |                 0.667 |
+| sliding    | F0L    |       0 |   nan     |        nan |   nan     |              0     | F0 held-out 9 s to end |               nan     |
+| sliding    | F1L    |       1 |     8.669 |          1 |     0.08  |              0.062 | pre-onset              |                 0.873 |
+| sliding    | F2L    |       2 |     8.902 |          1 |     0     |              1     | pre-onset              |                 1     |
+| sliding    | F3L    |       3 |     8.929 |          1 |     0.04  |              0     | pre-onset              |                 0.972 |
+| sliding    | F4L    |       4 |     7.149 |          1 |     0     |              0.061 | pre-onset              |                 0.129 |
+| sliding    | F5L    |       5 |     7.169 |          1 |     0.2   |              0.038 | pre-onset              |                 0.972 |
+| sliding    | F6L    |       6 |    11.209 |          1 |     0.88  |              0     | pre-onset              |                 0.25  |
+| sliding    | F7L    |       7 |     9.329 |          1 |     0.3   |              0     | pre-onset              |                 0.295 |
 
 
-## E3 class counts
+## Table: 1D CNN on raw waveforms (macro-F1 mean ± sd over seeds, 11_cnn.py)
+
+| exp                 | scope      | input   | macro_f1      |
+|:--------------------|:-----------|:--------|:--------------|
+| E2_prefault_blocked | IPPT       | raw     | 0.957 ± 0.015 |
+| E2_prefault_blocked | MPPT       | raw     | 0.995 ± 0.006 |
+| E2_prefault_random  | IPPT       | raw     | 0.986 ± 0.015 |
+| E2_prefault_random  | MPPT       | raw     | 0.996 ± 0.004 |
+| E3b_cross_mode      | IPPT->MPPT | delta   | 0.724 ± 0.084 |
+| E3b_cross_mode      | IPPT->MPPT | raw     | 0.159 ± 0.012 |
+| E3b_cross_mode      | MPPT->IPPT | delta   | 0.443 ± 0.030 |
+| E3b_cross_mode      | MPPT->IPPT | raw     | 0.232 ± 0.093 |
+
+
+## Table: cross-mode, default and six-class macro-F1 (mean ± sd over 5 seeds, 13_checks.py H6)
+
+| scope      | method         |   macro_f1_mean |   macro_f1_std |   macro_f1_six_mean |   macro_f1_six_std |
+|:-----------|:---------------|----------------:|---------------:|--------------------:|-------------------:|
+| IPPT->MPPT | LightGBM_delta |           0.524 |          0     |               0.524 |              0     |
+| IPPT->MPPT | LightGBM_raw   |           0.23  |          0     |               0.268 |              0     |
+| IPPT->MPPT | LogReg_delta   |           0.25  |          0     |               0.292 |              0     |
+| IPPT->MPPT | LogReg_raw     |           0.314 |          0     |               0.314 |              0     |
+| IPPT->MPPT | RF_delta       |           0.519 |          0.054 |               0.549 |              0.013 |
+| IPPT->MPPT | RF_raw         |           0.191 |          0.019 |               0.223 |              0.022 |
+| IPPT->MPPT | SVM-RBF_delta  |           0.306 |          0     |               0.306 |              0     |
+| IPPT->MPPT | SVM-RBF_raw    |           0.321 |          0     |               0.321 |              0     |
+| IPPT->MPPT | kNN_delta      |           0.511 |          0     |               0.511 |              0     |
+| IPPT->MPPT | kNN_raw        |           0.362 |          0     |               0.362 |              0     |
+| MPPT->IPPT | LightGBM_delta |           0.483 |          0     |               0.564 |              0     |
+| MPPT->IPPT | LightGBM_raw   |           0.152 |          0     |               0.177 |              0     |
+| MPPT->IPPT | LogReg_delta   |           0.27  |          0     |               0.315 |              0     |
+| MPPT->IPPT | LogReg_raw     |           0.149 |          0     |               0.174 |              0     |
+| MPPT->IPPT | RF_delta       |           0.412 |          0.009 |               0.481 |              0.011 |
+| MPPT->IPPT | RF_raw         |           0.288 |          0.039 |               0.336 |              0.045 |
+| MPPT->IPPT | SVM-RBF_delta  |           0.23  |          0     |               0.269 |              0     |
+| MPPT->IPPT | SVM-RBF_raw    |           0.177 |          0     |               0.206 |              0     |
+| MPPT->IPPT | kNN_delta      |           0.407 |          0     |               0.475 |              0     |
+| MPPT->IPPT | kNN_raw        |           0.396 |          0     |               0.463 |              0     |
+
+
+## Table: sensitivity, six-class macro-F1 (07_sensitivity.py)
+
+|                          |   ('LightGBM', 'IPPT->MPPT') |   ('LightGBM', 'MPPT->IPPT') |   ('RF', 'IPPT->MPPT') |   ('RF', 'MPPT->IPPT') |
+|:-------------------------|-----------------------------:|-----------------------------:|-----------------------:|-----------------------:|
+| ('baseline_s', 2.0)      |                        0.544 |                        0.528 |                  0.482 |                  0.47  |
+| ('baseline_s', 3.0)      |                        0.524 |                        0.564 |                  0.557 |                  0.483 |
+| ('baseline_s', 4.0)      |                        0.609 |                        0.541 |                  0.525 |                  0.493 |
+| ('guard_s', 0.25)        |                        0.564 |                        0.548 |                  0.566 |                  0.498 |
+| ('guard_s', 0.5)         |                        0.524 |                        0.564 |                  0.557 |                  0.483 |
+| ('guard_s', 1.0)         |                        0.529 |                        0.573 |                  0.477 |                  0.483 |
+| ('onset_shift_s', -1.0)  |                        0.488 |                        0.46  |                  0.474 |                  0.47  |
+| ('onset_shift_s', -0.5)  |                        0.539 |                        0.531 |                  0.519 |                  0.48  |
+| ('onset_shift_s', -0.25) |                        0.498 |                        0.553 |                  0.545 |                  0.492 |
+| ('onset_shift_s', 0.0)   |                        0.524 |                        0.564 |                  0.557 |                  0.483 |
+| ('onset_shift_s', 0.25)  |                        0.504 |                        0.545 |                  0.536 |                  0.482 |
+| ('onset_shift_s', 0.5)   |                        0.58  |                        0.588 |                  0.423 |                  0.48  |
+| ('onset_shift_s', 1.0)   |                        0.354 |                        0.357 |                  0.149 |                  0.228 |

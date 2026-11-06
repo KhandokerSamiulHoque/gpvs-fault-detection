@@ -1,0 +1,21 @@
+{
+  "run_id": "H2_E2_random__IPPT__dummy_stratified__s3__20261103-164807",
+  "exp": "H2_E2_random",
+  "method": "dummy_stratified",
+  "dataset": "IPPT",
+  "seed": 3,
+  "fold": null,
+  "config": {
+    "model": "DummyClassifier"
+  },
+  "metrics": {
+    "macro_f1": 0.14419589051620865,
+    "n_test": 983.0,
+    "n_classes": 7.0
+  },
+  "git_commit": "unavailable",
+  "git_dirty": false,
+  "data_sha256": {},
+  "wall_clock_s": 1.18,
+  "status": "ok"
+}

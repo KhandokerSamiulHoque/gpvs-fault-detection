@@ -1,0 +1,21 @@
+{
+  "run_id": "H1_E2_blocked__IPPT__rf_shuffled__s1__20261103-164737",
+  "exp": "H1_E2_blocked",
+  "method": "rf_shuffled",
+  "dataset": "IPPT",
+  "seed": 1,
+  "fold": null,
+  "config": {
+    "model": "RandomForestClassifier"
+  },
+  "metrics": {
+    "macro_f1": 0.15044441547122633,
+    "n_test": 986.0,
+    "n_classes": 7.0
+  },
+  "git_commit": "unavailable",
+  "git_dirty": false,
+  "data_sha256": {},
+  "wall_clock_s": 3.513,
+  "status": "ok"
+}

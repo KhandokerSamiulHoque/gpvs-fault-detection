@@ -1,0 +1,21 @@
+{
+  "run_id": "H1_E3b__IPPT_to_MPPT__lgbm_raw_shuffled__s2__20261103-165106",
+  "exp": "H1_E3b",
+  "method": "lgbm_raw_shuffled",
+  "dataset": "IPPT_to_MPPT",
+  "seed": 2,
+  "fold": null,
+  "config": {
+    "model": "LGBMClassifier"
+  },
+  "metrics": {
+    "macro_f1": 0.13836386400460637,
+    "n_test": 3274.0,
+    "n_classes": 6.0
+  },
+  "git_commit": "unavailable",
+  "git_dirty": false,
+  "data_sha256": {},
+  "wall_clock_s": 14.081,
+  "status": "ok"
+}

@@ -1,0 +1,21 @@
+{
+  "run_id": "H4_E2_blocked__MPPT__rf_raw__s1__20261103-165201",
+  "exp": "H4_E2_blocked",
+  "method": "rf_raw",
+  "dataset": "MPPT",
+  "seed": 1,
+  "fold": null,
+  "config": {
+    "model": "RandomForestClassifier"
+  },
+  "metrics": {
+    "macro_f1": 1.0,
+    "n_test": 662.0,
+    "n_classes": 7.0
+  },
+  "git_commit": "unavailable",
+  "git_dirty": false,
+  "data_sha256": {},
+  "wall_clock_s": 1.332,
+  "status": "ok"
+}

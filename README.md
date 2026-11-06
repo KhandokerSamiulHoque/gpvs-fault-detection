@@ -2,7 +2,7 @@
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23537370.svg)](https://doi.org/10.5281/zenodo.23537370)
 
-Published work on the GPVS-Faults dataset (a grid-connected PV inverter recorded under seven fault types) often reports near-perfect fault classification. This repo checks whether those scores come from the faults or from something easier. In short, the random-split protocol mostly teaches a model to recognize which recording a window came from. When the model has to work on a different operating mode, macro-F1 falls to between 0.15 and 0.52.
+Published work on the GPVS-Faults dataset (a grid-connected PV inverter recorded under seven fault types) often reports near-perfect fault classification. This repo checks where those scores come from. A random forest separates the runs at macro-F1 1.000 using only windows recorded before the estimated fault onset, so the model is recognizing the recording. Subtracting each run's own fault-free baseline helps across operating modes, but the shortcut stays: the same test still scores 0.897 (MPPT) and 0.961 (IPPT).
 
 ## Data
 GPVS-Faults by Bakdi, Guichi, Mekhilef and Bounoua (2020), [doi:10.17632/n76t439f65.1](https://doi.org/10.17632/n76t439f65.1), CC BY 4.0. It has 16 runs (fault F0 to F7, each in MPPT and IPPT mode) with 13 signals sampled at 10 kHz. The data are not included here. Download `CSV_Files.zip` from Mendeley Data and unzip it to `data/raw/gpvs_csv/CSV_Files/`.
@@ -11,35 +11,55 @@ GPVS-Faults by Bakdi, Guichi, Mekhilef and Bounoua (2020), [doi:10.17632/n76t439
 | Script | Step |
 |---|---|
 | `00_explore.py`, `01_overview_plots.py` | Check sampling rate, run lengths and signals |
-| `02_features.py` | Cut each run into 20 ms windows (one 50 Hz cycle) and compute 52 statistical and 5 physical features |
+| `02_features.py` | Cut each run into 20 ms windows (one 50 Hz cycle), compute 52 statistical and 5 physical features |
 | `03_onset.py` | Estimate when each fault starts, since the dataset does not publish onsets |
-| `04_experiments.py` | Experiments E1 to E4 below, five seeds, five model families |
-| `05_figures.py`, `06_tables.py` | Figures and the tables in `results/tables.md` |
+| `04_experiments.py` | Experiments E1 to E4, five seeds, five model families |
+| `11_cnn.py` | 1D CNN on raw 20 ms waveforms for E2 and E3b |
+| `12_detection_heldout.py` | E4 detection with thresholds set on the fault-free run from 4 to 9 s and checked from 9 s to the end |
 | `07_sensitivity.py` | Sensitivity to onset error, guard band and baseline length |
+| `13_checks.py`, `14_checks_summary.py` | Label shuffle, trivial baselines, raw versus referenced features, referencing on the shortcut test |
+| `05_figures.py`, `06_tables.py` | Figures and `results/tables.md` |
 
-## What the experiments show (macro-F1, mean over 5 seeds)
-- **E1, common protocol** (every window labeled with its run's fault, random split): random forest 0.999 to 1.000.
-- **E2, shortcut probe:** the same protocol using only windows recorded *before* any fault began still scores 1.000. The model separates runs that have no fault in them yet, so it is recognizing the recording rather than the fault.
-- **E3a, onset-based labels, random split:** LightGBM 0.999, random forest 0.991, logistic regression 0.812.
-- **E3b, cross-mode** (train on MPPT runs, test on IPPT runs, and the reverse): 0.15 to 0.52 across models. Features referenced to each run's own fault-free baseline help most, with LightGBM at 0.524 for IPPT to MPPT. Faults F1 and F3 are almost never recognized across modes.
-- **E4, unsupervised detection** (Hotelling T² on baseline-referenced features): a sliding-baseline detector flags all 14 fault runs, most within 0.4 s of onset. A static threshold misses 4.
+The added checks were planned in [docs/checks_plan_2026-11-03.md](docs/checks_plan_2026-11-03.md) before they ran, but after the main results were known. The main analysis was not preregistered.
 
-Full tables, per-class recall and bootstrap confidence intervals are in `results/tables.md`. Figures are in `figures/`.
+## Results
+Cross-mode scores below are macro-F1 over the six classes present in both modes (normal, F1, F2, F5, F6, F7). F3 has no usable MPPT windows, so the default seven-class score is not on one scale across directions. Those scores remain in `results/experiment_results.csv`.
+
+| Test | Result |
+|---|---|
+| E1, every window labeled with its run's fault, random split | Random forest 0.999 to 1.000 |
+| E2, pre-onset windows only, labeled by run | Random forest 1.000, CNN 0.969 to 0.998 |
+| E2 with baseline-referenced features, time-blocked split, from 3 s on | Random forest 0.897 (MPPT), 0.961 (IPPT). Floor from trivial baselines 0.142 to 0.146 |
+| E3b, train MPPT, test IPPT | LightGBM referenced 0.564, CNN referenced 0.486 |
+| E3b, train IPPT, test MPPT | LightGBM referenced 0.524, CNN referenced 0.717 |
+| E4, sliding-baseline detector | 12 of 12 locatable faults, delay up to 0.88 s, no false alarms in the held-out fault-free span |
+| E4, static detector | Held-out false alarm rate 97.3% (MPPT), 79.9% (IPPT), so its crossings don't count as detections |
+
+Referencing beat raw features for all four tree-ensemble comparisons (Holm p at most 0.0032). This test covers variation between windows only, because each class comes from one experiment per mode. Neither LightGBM nor the CNN wins in both directions.
+
+Full tables are in `results/tables.md`, per-run check outputs in `results_checks/`, figures in `figures/`.
 
 ## Reproduce
 ```bash
 pip install -r requirements.txt
 python code/02_features.py && python code/03_onset.py && python code/04_experiments.py
-python code/05_figures.py && python code/06_tables.py && python code/07_sensitivity.py
+python code/12_detection_heldout.py && python code/07_sensitivity.py
+python code/11_cnn.py && python code/11_cnn.py 0 1 2 3 4 5 6 7 8 9
+python code/13_checks.py && python code/14_checks_summary.py
+python code/05_figures.py && python code/06_tables.py
 ```
+`13_checks.py` took about an hour on a CPU. `python code/13_checks.py --smoke` runs a short version.
 
 ## Limits
-- One laboratory test rig. The results say nothing yet about field inverters.
-- Fault onsets are estimated, not ground truth (see `07_sensitivity.py`). F4 has no locatable onset and is left out of E3.
-- The F2L run oscillates strongly from the start of the recording, which inflates its pre-onset false alarms.
+- One laboratory test rig and one dataset. The results say nothing yet about field inverters.
+- Fault onsets are estimated, not ground truth. Bakdi et al. state faults start around 7 to 8 s, and 9 of the 12 locatable onsets here are later. Windows called fault-free may include faulty data in 8 runs. This has not been tested.
+- F4 has no locatable onset and is left out of E3.
+- Each mode has one fault-free run, and F2L alarms through its whole pre-onset part.
+- Which features carry the shortcut left after referencing has not been tested.
+- Raszka and Grycz independently reached the same core shortcut result in a [Zenodo deposit](https://doi.org/10.5281/zenodo.23646443) dated 25 October 2026.
 - Public data only. No employer data, equipment or procedures were used.
 
 Author: Khandoker Samiul Hoque (ORCID [0009-0008-0756-2395](https://orcid.org/0009-0008-0756-2395)). Code license: MIT. Manuscript in preparation.
 
 ## Archived release
-Version 1.0.0 is archived on Zenodo: [doi:10.5281/zenodo.23537371](https://doi.org/10.5281/zenodo.23537371). To cite the latest version instead, use [doi:10.5281/zenodo.23537370](https://doi.org/10.5281/zenodo.23537370).
+Version 1.0.0 is archived on Zenodo: [doi:10.5281/zenodo.23537371](https://doi.org/10.5281/zenodo.23537371). It predates scripts 11 to 14 and the results above. To cite the latest version instead, use [doi:10.5281/zenodo.23537370](https://doi.org/10.5281/zenodo.23537370).

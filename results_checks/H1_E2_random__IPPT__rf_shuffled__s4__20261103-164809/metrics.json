@@ -1,0 +1,21 @@
+{
+  "run_id": "H1_E2_random__IPPT__rf_shuffled__s4__20261103-164809",
+  "exp": "H1_E2_random",
+  "method": "rf_shuffled",
+  "dataset": "IPPT",
+  "seed": 4,
+  "fold": null,
+  "config": {
+    "model": "RandomForestClassifier"
+  },
+  "metrics": {
+    "macro_f1": 0.1301641997957035,
+    "n_test": 983.0,
+    "n_classes": 7.0
+  },
+  "git_commit": "unavailable",
+  "git_dirty": false,
+  "data_sha256": {},
+  "wall_clock_s": 3.34,
+  "status": "ok"
+}

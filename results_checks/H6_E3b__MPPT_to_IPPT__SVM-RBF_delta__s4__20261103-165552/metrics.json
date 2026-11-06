@@ -1,0 +1,22 @@
+{
+  "run_id": "H6_E3b__MPPT_to_IPPT__SVM-RBF_delta__s4__20261103-165552",
+  "exp": "H6_E3b",
+  "method": "SVM-RBF_delta",
+  "dataset": "MPPT_to_IPPT",
+  "seed": 4,
+  "fold": null,
+  "config": {
+    "model": "SVM-RBF",
+    "features": "delta"
+  },
+  "metrics": {
+    "macro_f1": 0.2303305385215458,
+    "macro_f1_six": 0.26871896160847014,
+    "n_test": 3389.0
+  },
+  "git_commit": "unavailable",
+  "git_dirty": false,
+  "data_sha256": {},
+  "wall_clock_s": 2.686,
+  "status": "ok"
+}

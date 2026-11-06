@@ -1,0 +1,22 @@
+{
+  "run_id": "H6_E3b__MPPT_to_IPPT__LightGBM_raw__s3__20261103-165409",
+  "exp": "H6_E3b",
+  "method": "LightGBM_raw",
+  "dataset": "MPPT_to_IPPT",
+  "seed": 3,
+  "fold": null,
+  "config": {
+    "model": "LightGBM",
+    "features": "raw"
+  },
+  "metrics": {
+    "macro_f1": 0.1520103075745222,
+    "macro_f1_six": 0.17734535883694255,
+    "n_test": 3389.0
+  },
+  "git_commit": "unavailable",
+  "git_dirty": false,
+  "data_sha256": {},
+  "wall_clock_s": 7.069,
+  "status": "ok"
+}

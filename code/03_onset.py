@@ -73,8 +73,8 @@ on["locatable"] = (on["fault"] > 0) & ((on["score_vs_F0"] >= 2.0) | (on["feat_sc
 on.to_csv(RES / "onsets.csv", index=False)
 print(on.round(3).to_string())
 
-# Figure: Vdc per run with the estimated onset marked. Sized to print at 16 cm wide (TJEECS limit),
-# Times New Roman, saved as PNG (drafts) and PDF (TJEECS accepts only PDF figures).
+# Figure: Vdc per run with the estimated onset marked. Sized to print at 16 cm wide,
+# Times New Roman, saved as PNG and PDF.
 plt.rcParams.update({"font.family": "Times New Roman", "font.size": 7, "pdf.fonttype": 42})  # 42 = editable TrueType text
 fig, axes = plt.subplots(4, 4, figsize=(6.3, 5.6))
 for ax, (_, r) in zip(axes.ravel(), on.iterrows()):

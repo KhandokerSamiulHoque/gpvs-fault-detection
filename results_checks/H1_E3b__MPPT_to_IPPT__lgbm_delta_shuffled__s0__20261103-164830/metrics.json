@@ -1,0 +1,21 @@
+{
+  "run_id": "H1_E3b__MPPT_to_IPPT__lgbm_delta_shuffled__s0__20261103-164830",
+  "exp": "H1_E3b",
+  "method": "lgbm_delta_shuffled",
+  "dataset": "MPPT_to_IPPT",
+  "seed": 0,
+  "fold": null,
+  "config": {
+    "model": "LGBMClassifier"
+  },
+  "metrics": {
+    "macro_f1": 0.11444270015698588,
+    "n_test": 3389.0,
+    "n_classes": 7.0
+  },
+  "git_commit": "unavailable",
+  "git_dirty": false,
+  "data_sha256": {},
+  "wall_clock_s": 16.886,
+  "status": "ok"
+}

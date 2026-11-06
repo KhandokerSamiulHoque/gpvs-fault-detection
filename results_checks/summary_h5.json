@@ -1,0 +1,66 @@
+{
+ "a_delta_vs_raw": [
+  {
+   "score": "macro_f1_six",
+   "scope": "MPPT->IPPT",
+   "mean_diff": 0.1996792058571481,
+   "delta_wins": 9,
+   "n": 10,
+   "p": 0.00390625,
+   "p_holm": 0.00390625
+  },
+  {
+   "score": "macro_f1_six",
+   "scope": "IPPT->MPPT",
+   "mean_diff": 0.48850524116169025,
+   "delta_wins": 10,
+   "n": 10,
+   "p": 0.001953125,
+   "p_holm": 0.00390625
+  },
+  {
+   "score": "macro_f1",
+   "scope": "MPPT->IPPT",
+   "mean_diff": 0.17115360502041266,
+   "delta_wins": 9,
+   "n": 10,
+   "p": 0.00390625,
+   "p_holm": 0.00390625
+  },
+  {
+   "score": "macro_f1",
+   "scope": "IPPT->MPPT",
+   "mean_diff": 0.4949809030633398,
+   "delta_wins": 10,
+   "n": 10,
+   "p": 0.001953125,
+   "p_holm": 0.00390625
+  }
+ ],
+ "b_delta_vs_lightgbm": [
+  {
+   "scope": "MPPT->IPPT",
+   "cnn_mean": 0.48582996108325965,
+   "cnn_sd": 0.06996892958747353,
+   "cnn_min": 0.3428981535143954,
+   "cnn_max": 0.555359204313843,
+   "lightgbm": 0.5635988781387259,
+   "cnn_above": 0,
+   "n": 10,
+   "p": 0.001953125,
+   "p_holm": 0.00390625
+  },
+  {
+   "scope": "IPPT->MPPT",
+   "cnn_mean": 0.7165853478563412,
+   "cnn_sd": 0.0615481399610063,
+   "cnn_min": 0.6470822621555098,
+   "cnn_max": 0.8334488156229013,
+   "lightgbm": 0.5242807619892967,
+   "cnn_above": 10,
+   "n": 10,
+   "p": 0.001953125,
+   "p_holm": 0.00390625
+  }
+ ]
+}

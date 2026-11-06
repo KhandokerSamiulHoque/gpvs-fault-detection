@@ -1,0 +1,21 @@
+{
+  "run_id": "H4_E2_blocked__MPPT__rf_delta__s2__20261103-165210",
+  "exp": "H4_E2_blocked",
+  "method": "rf_delta",
+  "dataset": "MPPT",
+  "seed": 2,
+  "fold": null,
+  "config": {
+    "model": "RandomForestClassifier"
+  },
+  "metrics": {
+    "macro_f1": 0.8922476123655452,
+    "n_test": 662.0,
+    "n_classes": 7.0
+  },
+  "git_commit": "unavailable",
+  "git_dirty": false,
+  "data_sha256": {},
+  "wall_clock_s": 1.42,
+  "status": "ok"
+}

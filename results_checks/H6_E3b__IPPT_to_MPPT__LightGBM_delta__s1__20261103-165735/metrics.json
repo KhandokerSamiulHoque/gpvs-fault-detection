@@ -1,0 +1,22 @@
+{
+  "run_id": "H6_E3b__IPPT_to_MPPT__LightGBM_delta__s1__20261103-165735",
+  "exp": "H6_E3b",
+  "method": "LightGBM_delta",
+  "dataset": "IPPT_to_MPPT",
+  "seed": 1,
+  "fold": null,
+  "config": {
+    "model": "LightGBM",
+    "features": "delta"
+  },
+  "metrics": {
+    "macro_f1": 0.5242807619892967,
+    "macro_f1_six": 0.5242807619892967,
+    "n_test": 3274.0
+  },
+  "git_commit": "unavailable",
+  "git_dirty": false,
+  "data_sha256": {},
+  "wall_clock_s": 9.164,
+  "status": "ok"
+}

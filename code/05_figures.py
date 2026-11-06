@@ -1,4 +1,4 @@
-"""Publication figures for Paper B (300 dpi PNG). Reads the outputs of 03_onset.py and 04_experiments.py.
+"""Publication figures (300 dpi PNG). Reads the outputs of 03_onset.py and 04_experiments.py.
 
 Run:  python code/05_figures.py
 """
@@ -33,12 +33,16 @@ CLASS_LABEL = {0: "Normal", 1: "F1 inverter", 2: "F2 sensor", 3: "F3 grid", 5: "
 
 
 def save(fig, name):
-    """Save PNG (for the Word/Markdown drafts) and PDF (TJEECS accepts only PDF figures)."""
+    """Save PNG and PDF."""
     fig.savefig(FIG / f"{name}.png")
     fig.savefig(FIG / f"{name}.pdf")
 
 
 res = pd.read_csv(RES / "experiment_results.csv")
+# cross-mode scores on one scale: macro-F1 over the six classes present in both modes (13_checks.py, H6)
+h6 = [json.load(open(f)) for f in (ROOT / "results_checks").glob("H6_E3b__*/metrics.json")]
+h6 = pd.DataFrame([{"scope": m["dataset"].replace("_to_", "->"), "model": m["method"].rsplit("_", 1)[0],
+                    "features": m["method"].rsplit("_", 1)[1], "macro_f1": m["metrics"]["macro_f1_six"]} for m in h6])
 preds = json.load(open(RES / "predictions.json"))
 
 # ---------- Fig. 3: the same data, four evaluation protocols ----------
@@ -46,13 +50,17 @@ def ms(q):
     s = res.query(q)["macro_f1"]
     return s.mean(), s.std()
 
+def ms6(features):
+    s = h6[(h6.model == "LightGBM") & (h6.features == features) & (h6.scope == "MPPT->IPPT")]["macro_f1"]
+    return s.mean(), s.std()
+
 bars = [
     ("E1\nrun labels\nrandom split", ms("exp=='E1_file_label_random' and scope=='MPPT'"), None),
     ("E2\nfault-free only\nrandom split", ms("exp=='E2_prefault_random' and scope=='MPPT'"), 1 / 7),
     ("E2\nfault-free only\ntime-blocked", ms("exp=='E2_prefault_blocked' and scope=='MPPT'"), 1 / 7),
     ("E3a\nonset labels\nrandom split", ms("exp=='E3a_onset_random' and model=='LightGBM' and features=='raw'"), None),
-    ("E3b\nMPPT→IPPT\nraw features", ms("exp=='E3b_cross_mode' and model=='LightGBM' and features=='raw' and scope=='MPPT->IPPT'"), None),
-    ("E3b\nMPPT→IPPT\ndelta features", ms("exp=='E3b_cross_mode' and model=='LightGBM' and features=='delta' and scope=='MPPT->IPPT'"), None),
+    ("E3b\nMPPT→IPPT\nraw features", ms6("raw"), None),
+    ("E3b\nMPPT→IPPT\ndelta features", ms6("delta"), None),
 ]
 fig, ax = plt.subplots(figsize=(7.2, 3.2))
 x = np.arange(len(bars))
@@ -74,7 +82,7 @@ save(fig, "fig3_protocols")
 plt.close(fig)
 
 # ---------- Fig. 4: cross-mode macro-F1 heatmap, models x (feature set, direction) ----------
-e3b = res[res.exp == "E3b_cross_mode"].groupby(["model", "features", "scope"])["macro_f1"].mean().unstack(["features", "scope"])
+e3b = h6.groupby(["model", "features", "scope"])["macro_f1"].mean().unstack(["features", "scope"])
 order_cols = [("raw", "MPPT->IPPT"), ("raw", "IPPT->MPPT"), ("delta", "MPPT->IPPT"), ("delta", "IPPT->MPPT")]
 order_rows = ["LightGBM", "RF", "kNN", "SVM-RBF", "LogReg"]
 H = e3b.loc[order_rows, order_cols]
@@ -87,7 +95,7 @@ for i in range(H.shape[0]):
 ax.set_xticks(range(4), [f"{f}\n{s.replace('->', chr(8594))}" for f, s in order_cols], fontsize=8)
 ax.set_yticks(range(len(order_rows)), order_rows)
 cb = fig.colorbar(im, ax=ax, fraction=0.04, pad=0.02)
-cb.set_label("Macro-F1 (mean of 5 seeds)", fontsize=8)
+cb.set_label("Six-class macro-F1 (mean of 5 seeds)", fontsize=8)
 cb.outline.set_visible(False)
 for s in ax.spines.values():
     s.set_visible(False)
@@ -136,7 +144,9 @@ for ax, f in zip(axes.ravel(), show):
     m4 = t >= 4.0  # sliding detector needs 4 s of history
     ax.plot(t[m4], np.clip(slide[m4], 1e-2, None), color=AQUA, lw=1.0)
     ax.axhline(1.0, color=INK, ls=":", lw=1.0)
-    if f[1] != "0":
+    if f[1] == "0":
+        ax.axvspan(4.0, 9.0, color=GRID, alpha=0.6, lw=0)  # threshold calibration span (12_detection_heldout.py)
+    else:
         ax.axvline(det.query("file==@f and detector=='static'")["onset_t"].iloc[0], color=ORANGE, lw=1.2, ls="--")
     ax.set_yscale("log")
     ax.set_title(f, fontsize=8.5)

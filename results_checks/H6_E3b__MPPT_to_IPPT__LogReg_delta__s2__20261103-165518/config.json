@@ -1,0 +1,4 @@
+{
+  "model": "LogReg",
+  "features": "delta"
+}

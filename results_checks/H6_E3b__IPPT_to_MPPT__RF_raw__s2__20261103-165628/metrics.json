@@ -1,0 +1,22 @@
+{
+  "run_id": "H6_E3b__IPPT_to_MPPT__RF_raw__s2__20261103-165628",
+  "exp": "H6_E3b",
+  "method": "RF_raw",
+  "dataset": "IPPT_to_MPPT",
+  "seed": 2,
+  "fold": null,
+  "config": {
+    "model": "RF",
+    "features": "raw"
+  },
+  "metrics": {
+    "macro_f1": 0.1764677803283301,
+    "macro_f1_six": 0.20587907704971845,
+    "n_test": 3274.0
+  },
+  "git_commit": "unavailable",
+  "git_dirty": false,
+  "data_sha256": {},
+  "wall_clock_s": 2.477,
+  "status": "ok"
+}

@@ -1,4 +1,4 @@
-"""Main experiments for Paper B.
+"""Main experiments.
 
 E1  Reproduce the common protocol: every window gets its run's fault label, random 70/30 window split.
 E2  Shortcut probe: same protocol but only windows BEFORE the fault onset (physically fault-free).

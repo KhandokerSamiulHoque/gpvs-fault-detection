@@ -1,0 +1,22 @@
+{
+  "run_id": "H6_E3b__MPPT_to_IPPT__LogReg_delta__s1__20261103-165503",
+  "exp": "H6_E3b",
+  "method": "LogReg_delta",
+  "dataset": "MPPT_to_IPPT",
+  "seed": 1,
+  "fold": null,
+  "config": {
+    "model": "LogReg",
+    "features": "delta"
+  },
+  "metrics": {
+    "macro_f1": 0.26981360948811217,
+    "macro_f1_six": 0.31478254440279757,
+    "n_test": 3389.0
+  },
+  "git_commit": "unavailable",
+  "git_dirty": false,
+  "data_sha256": {},
+  "wall_clock_s": 1.531,
+  "status": "ok"
+}

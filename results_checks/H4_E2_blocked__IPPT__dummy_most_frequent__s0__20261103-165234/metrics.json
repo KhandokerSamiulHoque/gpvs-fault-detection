@@ -1,0 +1,21 @@
+{
+  "run_id": "H4_E2_blocked__IPPT__dummy_most_frequent__s0__20261103-165234",
+  "exp": "H4_E2_blocked",
+  "method": "dummy_most_frequent",
+  "dataset": "IPPT",
+  "seed": 0,
+  "fold": null,
+  "config": {
+    "model": "DummyClassifier"
+  },
+  "metrics": {
+    "macro_f1": 0.05802511028164235,
+    "n_test": 671.0,
+    "n_classes": 7.0
+  },
+  "git_commit": "unavailable",
+  "git_dirty": false,
+  "data_sha256": {},
+  "wall_clock_s": 0.588,
+  "status": "ok"
+}
