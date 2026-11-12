@@ -75,4 +75,4 @@ Author: Khandoker Samiul Hoque (ORCID [0009-0008-0756-2395](https://orcid.org/00
 | 1.1.0 | 12 Nov 2026 | Current analysis: scripts 11 to 14, held-out detection, the added checks and the results above |
 | 1.0.0 | 21 Oct 2026 | First release: scripts 00 to 07 only. Its README gives an older detector result, and it cannot reproduce the CNN, the held-out detection or the H4 figures |
 
-Each version is archived on Zenodo. Version 1.0.0 is [doi:10.5281/zenodo.23537371](https://doi.org/10.5281/zenodo.23537371). To cite the latest version, use the concept DOI [10.5281/zenodo.23537370](https://doi.org/10.5281/zenodo.23537370), which always points to the newest release. See [CHANGELOG.md](CHANGELOG.md) for details.
+Each version is archived on Zenodo. Version 1.1.0 is [doi:10.5281/zenodo.24170184](https://doi.org/10.5281/zenodo.24170184), and version 1.0.0 is [doi:10.5281/zenodo.23537371](https://doi.org/10.5281/zenodo.23537371). To cite the latest version, use the concept DOI [10.5281/zenodo.23537370](https://doi.org/10.5281/zenodo.23537370), which always points to the newest release. See [CHANGELOG.md](CHANGELOG.md) for details.
