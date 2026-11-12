@@ -48,7 +48,15 @@ python code/11_cnn.py && python code/11_cnn.py 0 1 2 3 4 5 6 7 8 9
 python code/13_checks.py && python code/14_checks_summary.py
 python code/05_figures.py && python code/06_tables.py
 ```
-`13_checks.py` took about an hour on a CPU. `python code/13_checks.py --smoke` runs a short version.
+On one CPU with no GPU, `13_checks.py` took 22 minutes and the two `11_cnn.py` runs took 26 minutes. `python code/13_checks.py --smoke` runs a short version.
+
+### Check the 0.897 and 0.961 figures
+These come from check H4 and need version 1.1.0 or later. Version 1.0.0 does not have `13_checks.py`.
+```bash
+python code/02_features.py && python code/03_onset.py && python code/04_experiments.py
+python code/13_checks.py && python code/14_checks_summary.py
+```
+In the H4 table that `14_checks_summary.py` prints, the `H4_E2_blocked` rows for `rf_delta` give 0.897 (MPPT) and 0.961 (IPPT), each the mean of five seeds. Everything above, plus `11_cnn.py`, was rerun on 12 November 2026 from a clean copy of this repo. All 260 check runs, the summary files and the CNN results matched the stored files exactly.
 
 ## Limits
 - One laboratory test rig and one dataset. The results say nothing yet about field inverters.
@@ -61,5 +69,10 @@ python code/05_figures.py && python code/06_tables.py
 
 Author: Khandoker Samiul Hoque (ORCID [0009-0008-0756-2395](https://orcid.org/0009-0008-0756-2395)). Code license: MIT. Manuscript in preparation.
 
-## Archived release
-Version 1.0.0 is archived on Zenodo: [doi:10.5281/zenodo.23537371](https://doi.org/10.5281/zenodo.23537371). It predates scripts 11 to 14 and the results above. To cite the latest version instead, use [doi:10.5281/zenodo.23537370](https://doi.org/10.5281/zenodo.23537370).
+## Versions
+| Version | Date | Contents |
+|---|---|---|
+| 1.1.0 | 12 Nov 2026 | Current analysis: scripts 11 to 14, held-out detection, the added checks and the results above |
+| 1.0.0 | 21 Oct 2026 | First release: scripts 00 to 07 only. Its README gives an older detector result, and it cannot reproduce the CNN, the held-out detection or the H4 figures |
+
+Each version is archived on Zenodo. Version 1.0.0 is [doi:10.5281/zenodo.23537371](https://doi.org/10.5281/zenodo.23537371). To cite the latest version, use the concept DOI [10.5281/zenodo.23537370](https://doi.org/10.5281/zenodo.23537370), which always points to the newest release. See [CHANGELOG.md](CHANGELOG.md) for details.

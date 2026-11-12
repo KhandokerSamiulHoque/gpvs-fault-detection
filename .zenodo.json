@@ -1,10 +1,28 @@
 {
   "title": "Leakage-Aware Fault Detection on GPVS-Faults (code and results)",
   "upload_type": "software",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "access_right": "open",
-  "creators": [{"name": "Hoque, Khandoker Samiul", "orcid": "0009-0008-0756-2395"}],
-  "description": "Evaluation of fault classification and detection on the public GPVS-Faults grid-connected PV inverter dataset. Shows that random window splits let models recognize the recording rather than the fault, and reports cross-mode (MPPT/IPPT) transfer and unsupervised T2 detection.",
+  "creators": [
+    {
+      "name": "Hoque, Khandoker Samiul",
+      "orcid": "0009-0008-0756-2395"
+    }
+  ],
+  "description": "Evaluation of fault classification and detection on the public GPVS-Faults grid-connected PV inverter dataset. A random forest separates runs at macro-F1 1.000 using only windows recorded before the estimated fault onset, so random window splits let models recognize the recording rather than the fault. Subtracting each run's fault-free baseline helps across operating modes (MPPT/IPPT) but does not remove this shortcut: the same test still scores 0.897 (MPPT) and 0.961 (IPPT). Version 1.1.0 adds a 1D CNN, held-out detection thresholds and robustness checks, and reproduces these figures.",
   "license": "mit",
-  "keywords": ["photovoltaics", "inverter fault detection", "data leakage", "machine learning", "power electronics"],"related_identifiers": [{"identifier": "10.17632/n76t439f65.1", "relation": "references", "scheme": "doi"}]
+  "keywords": [
+    "photovoltaics",
+    "inverter fault detection",
+    "data leakage",
+    "machine learning",
+    "power electronics"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "10.17632/n76t439f65.1",
+      "relation": "references",
+      "scheme": "doi"
+    }
+  ]
 }
